@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </head>
+ 
+
+
+
+  <body>
+    
+  	<div class="container">
+  		<div class="table-responsive">
+  			<table class="table table-bordered table-striped" id="table1">
+  				<tr>
+  					<th>autor</th>
+  					<th>coms</th>
+  				</tr>
+  			</table>
+  		</div>
+  	</div>
+
+
+
+
+    <script>
+
+    	$(document).ready(function(){
+    	var i;
+
+    	for (i=0; i<590; i++){
+
+        $.getJSON( "https://cors-anywhere.herokuapp.com/https://www.wikiaves.com.br/getRegistrosJSON.php?&p="+i, function( data ) {
+        	console.log(data);
+        	console.table(data);
+
+			for (var i = 1; i < 21; i++) {
+    var tr = $('<tr/>');
+    
+    // Indexing into data.report for each td element
+    $(tr).append("<td>" + data.itens[i].autor + "</td>");
+    $(tr).append("<td>" + data.itens[i].coms + "</td>");
+    
+    $('.table1').append(tr);
+  }
+        });
+
+    	};
+    	});
+
+
+    	//https://stackoverflow.com/questions/18635132/json-object-with-or-without-quotes
+    	//o json do wikiaves nao tem [], talvez tenha que fazer stringify
+
+
+
+    	//plotar em uma tabela com bootstrap
+    	//https://www.youtube.com/watch?v=pUQFToFrMF4
+    	//acho que pra sub itens tem que colocar item.subitem
+
+    	//429 too many requests
+       
+    </script>
+  </body>
+</html>
